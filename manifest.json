@@ -2,7 +2,7 @@
   "name": "MedApp",
   "short_name": "MedApp",
   "description": "Personal medicine inventory management app",
-  "start_url": "/",
+  "start_url": "/MedApp/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#2196F3",

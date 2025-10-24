@@ -34,6 +34,10 @@ A Progressive Web App (PWA) for managing personal medicine inventory with smart 
 
 ## Installation
 
+### Live Demo
+
+Visit the live application at: [https://ishitaasthana.github.io/MedApp/](https://ishitaasthana.github.io/MedApp/)
+
 ### As a Web App
 
 1. Open `index.html` in a web browser
@@ -151,6 +155,37 @@ The app works completely offline once loaded:
 - All data stored locally
 - No internet required after first load
 - Service worker caches all resources
+
+## Deployment
+
+### GitHub Pages
+
+The app is automatically deployed to GitHub Pages using GitHub Actions:
+
+1. Push changes to the `main` branch
+2. GitHub Actions workflow automatically builds and deploys the app
+3. Access the deployed app at: https://ishitaasthana.github.io/MedApp/
+
+**Manual Deployment:**
+
+If you want to manually trigger deployment:
+1. Go to the repository's "Actions" tab
+2. Select "Deploy to GitHub Pages" workflow
+3. Click "Run workflow"
+
+**Configuration:**
+
+The repository is configured for GitHub Pages deployment with:
+- Workflow file: `.github/workflows/deploy.yml`
+- Base path in `manifest.json`: `/MedApp/`
+- Service worker paths updated for GitHub Pages
+
+### Custom Domain (Optional)
+
+To use a custom domain:
+1. Go to repository Settings → Pages
+2. Add your custom domain
+3. Update the base paths in `manifest.json` and `sw.js` accordingly
 
 ## File Structure
 
