@@ -1,11 +1,12 @@
 const CACHE_NAME = "medapp-v1";
+const BASE_PATH = "/MedApp";
 const urlsToCache = [
-  "/",
-  "/index.html",
-  "/css/styles.css",
-  "/js/app.js",
-  "/js/database.js",
-  "/manifest.json",
+  `${BASE_PATH}/`,
+  `${BASE_PATH}/index.html`,
+  `${BASE_PATH}/css/styles.css`,
+  `${BASE_PATH}/js/app.js`,
+  `${BASE_PATH}/js/database.js`,
+  `${BASE_PATH}/manifest.json`,
   "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js",
   "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.wasm",
 ];
