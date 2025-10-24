@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedApp - Medicine Manager</title>
+    <meta name="theme-color" content="#2196F3">
+    <meta name="description" content="Personal medicine inventory management app">
+    
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="MedApp">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- SQL.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>🏥 MedApp</h1>
+            <p>Medicine Inventory Manager</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="medicines">📋 Medicines</button>
+            <button class="tab-btn" data-tab="add">➕ Add Medicine</button>
+            <button class="tab-btn" data-tab="alerts">⚠️ Alerts</button>
+        </nav>
+
+        <!-- Medicines List Tab -->
+        <section id="medicines-tab" class="tab-content active">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="🔍 Search medicines...">
+            </div>
+            
+            <div class="medicines-container">
+                <div class="table-responsive">
+                    <table id="medicines-table">
+                        <thead>
+                            <tr>
+                                <th>Medicine Name</th>
+                                <th>Quantity</th>
+                                <th>Dosage</th>
+                                <th>Days Left</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="medicines-tbody">
+                            <!-- Medicine rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div id="no-medicines" class="empty-state" style="display: none;">
+                    <h3>No medicines added yet</h3>
+                    <p>Click "Add Medicine" to get started!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Add Medicine Tab -->
+        <section id="add-tab" class="tab-content">
+            <form id="medicine-form" class="medicine-form">
+                <h2 id="form-title">Add New Medicine</h2>
+                
+                <div class="form-group">
+                    <label for="medicine-name">Medicine Name *</label>
+                    <input type="text" id="medicine-name" required placeholder="e.g., Aspirin">
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity-bought">Quantity Bought *</label>
+                    <input type="number" id="quantity-bought" required min="1" placeholder="e.g., 30">
+                    <small>Total number of pills/tablets purchased</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="dosage-frequency">Dosage Frequency *</label>
+                    <select id="dosage-frequency" required>
+                        <option value="">Select frequency</option>
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="dosage-amount">Dosage Amount *</label>
+                    <input type="number" id="dosage-amount" required min="0.5" step="0.5" placeholder="e.g., 1">
+                    <small>Number of pills/tablets per dose</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="purchase-date">Purchase Date *</label>
+                    <input type="date" id="purchase-date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Notes (Optional)</label>
+                    <textarea id="notes" placeholder="Any additional notes about this medicine..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <span id="submit-text">Add Medicine</span>
+                    </button>
+                    <button type="button" id="cancel-btn" class="btn btn-secondary" style="display: none;">
+                        Cancel
+                    </button>
+                </div>
+                
+                <input type="hidden" id="edit-id" value="">
+            </form>
+        </section>
+
+        <!-- Alerts Tab -->
+        <section id="alerts-tab" class="tab-content">
+            <h2>Stock Alerts</h2>
+            <div id="alerts-container">
+                <!-- Alerts will be populated here -->
+            </div>
+        </section>
+
+        <!-- Toast Notifications -->
+        <div id="toast-container"></div>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="loading-spinner"></div>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/database.js"></script>
+    <script src="js/app.js"></script>
+    
+    <!-- PWA Installation -->
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
